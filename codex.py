@@ -6,7 +6,15 @@ codex = {}
 def search_character(name):
     response = requests.get(f"{API_URL}{name.lower()}")
     if response.status_code == 200:
-        return response.json()
+        data = response.json()
+        codex = {
+            "name": data["name"].capitalize(),
+            "games": data["games"],
+            "faction": data["faction"],
+            "first_appearance": data["first_appearance"],
+            "wiki_url": data["wiki_url"]
+            }
+        return codex
     else:
         print("Character not found.")
         return None
