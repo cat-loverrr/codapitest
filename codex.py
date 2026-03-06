@@ -38,10 +38,12 @@ def view_codex():
         print("Your CoD-dex is empty.")
 
 def remove_character(name):
-    formatted = name.title()
-    if formatted in codex:
-        del codex[formatted]
-        print(f"{formatted} removed from your CoD-dex.")
+    key = name.lower()
+    for stored_name, details in list(codex.items()):
+        if details["name"].lower().find(key) != -1:
+            del codex[stored_name]
+            print(f"{stored_name} removed from your CoD-dex.")
+            return
     else:
         print("Character not found in your CoD-dex.")
 
