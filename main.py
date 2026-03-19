@@ -11,24 +11,35 @@ def main():
 
         choice = input("Choose an option: ").strip()
 
+        # SEARCH CHARACTER
         if choice == "1":
-            name = input("Enter character name: ").strip()
-            result = search_character(name)
-            if result:
-                for key, value in result.items():
-                    print(f"{key}: {value}")
+            name = input("Enter character name or keyword: ").strip()
+            results = search_character(name)
 
+            if results:
+                print(f"\nFound {len(results)} result(s):")
+                for character in results:
+                    print("\n--- Character ---")
+                    for key, value in character.items():
+                        print(f"{key}: {value}")
+            else:
+                print("No matching characters found.")
+
+        # ADD CHARACTER
         elif choice == "2":
             name = input("Enter character name to add: ").strip()
             add_character(name)
 
+        # VIEW CODEX
         elif choice == "3":
             view_codex()
 
+        # REMOVE CHARACTER
         elif choice == "4":
             name = input("Enter character name to remove: ").strip()
             remove_character(name)
 
+        # EXIT
         elif choice == "5":
             print("Exiting CoD-dex.")
             break
@@ -38,4 +49,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

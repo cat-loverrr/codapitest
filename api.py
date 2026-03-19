@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 character_list = [
   {
-     "name": "John Price",
+    "name": "John Price",
     "games": ["Modern Warfare (2019)", "Modern Warfare II (2022)", "Modern Warfare III (2023)"],
     "faction": "Task Force 141",
     "first_appearance": "Modern Warfare (2019)",
@@ -59,7 +59,6 @@ character_list = [
     "first_appearance": "Modern Warfare (2019)",
     "wiki_url": "https://callofduty.fandom.com/wiki/Alex_Keller"
   },
-
   {
     "name": "Vladimir Makarov",
     "games": ["Modern Warfare III (2023)"],
@@ -88,7 +87,6 @@ character_list = [
     "first_appearance": "Modern Warfare III (2023)",
     "wiki_url": "https://callofduty.fandom.com/wiki/Konni_Group"
   },
-
   {
     "name": "Logan Walker",
     "games": ["Call of Duty: Ghosts"],
@@ -145,29 +143,60 @@ character_list = [
     "first_appearance": "Call of Duty: Ghosts",
     "wiki_url": "https://callofduty.fandom.com/wiki/Victor_Ramos"
   },
-{
-  "name": "Jacob 'Ajax' Hendricks",
-  "games": ["Call of Duty: Ghosts"],
-  "faction": "Ghosts",
-  "first_appearance": "Call of Duty: Ghosts",
-  "wiki_url": "https://callofduty.fandom.com/wiki/Ajax_(Ghosts)"
-},
-{
-  "name": "Kate Laswell",
-  "games": ["Modern Warfare (2019)", "Modern Warfare II (2022)", "Modern Warfare III (2023)"],
-  "faction": "CIA; Task Force 141 (ally)",
-  "first_appearance": "Modern Warfare (2019)",
-  "wiki_url": "https://callofduty.fandom.com/wiki/Kate_Laswell"
-}
+  {
+    "name": "Jacob 'Ajax' Hendricks",
+    "games": ["Call of Duty: Ghosts"],
+    "faction": "Ghosts",
+    "first_appearance": "Call of Duty: Ghosts",
+    "wiki_url": "https://callofduty.fandom.com/wiki/Ajax_(Ghosts)"
+  },
+  {
+    "name": "Kate Laswell",
+    "games": ["Modern Warfare (2019)", "Modern Warfare II (2022)", "Modern Warfare III (2023)"],
+    "faction": "CIA; Task Force 141 (ally)",
+    "first_appearance": "Modern Warfare (2019)",
+    "wiki_url": "https://callofduty.fandom.com/wiki/Kate_Laswell"
+  },
+  {
+    "name": "Kick",
+    "games": ["Call of Duty: Ghosts"],
+    "faction": "Ghosts",
+    "first_appearance": "Call of Duty: Ghosts",
+    "wiki_url": "https://callofduty.fandom.com/wiki/Kick"
+  },
+  {
+    "name": "König",
+    "games": ["Modern Warfare II (2022)", "Modern Warfare III (2023)"],
+    "faction": "KorTac; SpecGru (multiplayer canon)",
+    "first_appearance": "Modern Warfare II (2022)",
+    "wiki_url": "https://callofduty.fandom.com/wiki/K%C3%B6nig"
+  }
 ]
+
+from difflib import SequenceMatcher
+
+def similar(a, b):
+    return SequenceMatcher(None, a, b).ratio()
+
+def search_character(query):
+    query = query.lower()
+    results = []
+
+    for character in character_list:
+        name = character["name"].lower()
+
+        if query in name or similar(query, name) > 0.6:
+            results.append(character)
+
+    return results
 
 characters = {c["name"].lower(): c for c in character_list}
 
 @app.get("/characters/<name>")
 def get_character(name):
-    key = name.lower()
-    if key in characters:
-        return jsonify(characters[key])
+    results = search_character(name)
+    if results:
+        return jsonify(results)
     return jsonify({"error": "Character not found"}), 404
 
 @app.get("/characters")
