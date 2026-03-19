@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 character_list = [
   {
-    "name": "John Price",
+     "name": "John Price",
     "games": ["Modern Warfare (2019)", "Modern Warfare II (2022)", "Modern Warfare III (2023)"],
     "faction": "Task Force 141",
     "first_appearance": "Modern Warfare (2019)",
