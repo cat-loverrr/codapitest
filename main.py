@@ -1,4 +1,9 @@
 from codex import *
+from charts import (
+    plot_characters_per_faction,
+    plot_characters_per_game,
+    plot_codex_progress
+)
 
 def main():
     while True:
@@ -8,6 +13,7 @@ def main():
         print("3. View CoD-dex")
         print("4. Remove Character")
         print("5. Exit")
+        print("6. View Charts")
 
         choice = input("Choose an option: ").strip()
 
@@ -43,6 +49,24 @@ def main():
         elif choice == "5":
             print("Exiting CoD-dex.")
             break
+
+        # VIEW CHARTS
+        elif choice == "6":
+            print("\nCharts:")
+            print("1. Characters per Faction")
+            print("2. Characters per Game")
+            print("3. CoD-dex Progress")
+
+            chart_choice = input("Choose a chart: ").strip()
+
+            if chart_choice == "1":
+                plot_characters_per_faction()
+            elif chart_choice == "2":
+                plot_characters_per_game()
+            elif chart_choice == "3":
+                plot_codex_progress()
+            else:
+                print("Invalid chart option.")
 
         else:
             print("Invalid choice. Try again.")

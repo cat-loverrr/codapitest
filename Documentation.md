@@ -1,0 +1,4 @@
+## Peer Testing - Arisa
+functional nonfunctional requirements + read me + requirements - not now ig
+
+Izzy's project is a very well-designed and highly functional design. Although I don't know much about Call of Duty, this application allows me to familiarise myself with characters within all series of games. In terms of non-functional requirements, this system responds to user inputs within 1 second and gracefully displays error messages due to user input mistakes. Since I am one person I cannot do any load testing and verify if this program is usable concurrently. Additionally, there is a comprehensive variety of actions the users can take and the visualisations and overall UX were easy to understand. Maybe some future improvements she could make is 'Remove Character' could be renamed as 'Remove character from CoD-dex' for more consistency, but ultimately there is not much else I can comment on this is hella fire.

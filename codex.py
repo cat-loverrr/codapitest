@@ -23,6 +23,8 @@ def add_character(name):
         for character in results:
             codex[character["name"]] = character
             print(f"{character['name']} added to your CoD-dex.")
+    else:
+        print("Invalid input.")
 
 def view_codex():
     if codex:
