@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
@@ -173,24 +173,29 @@ character_list = [
   }
 ]
 
-from difflib import SequenceMatcher
-
-def similar(a, b):
-    return SequenceMatcher(None, a, b).ratio()
-
+# -----------------------------
+# KEYWORD SEARCH (NO FUZZY)
+# -----------------------------
 def search_character(query):
     query = query.lower()
     results = []
 
     for character in character_list:
-        name = character["name"].lower()
+        combined = (
+            character["name"] + " " +
+            " ".join(character["games"]) + " " +
+            character["faction"] + " " +
+            character["first_appearance"]
+        ).lower()
 
-        if query in name or similar(query, name) > 0.6:
+        if query in combined:
             results.append(character)
 
     return results
 
-characters = {c["name"].lower(): c for c in character_list}
+# -----------------------------
+# ROUTES
+# -----------------------------
 
 @app.get("/characters/<name>")
 def get_character(name):
@@ -201,8 +206,13 @@ def get_character(name):
 
 @app.get("/characters")
 def list_characters():
-    return jsonify(list(characters.keys()))
+    return jsonify([c["name"] for c in character_list])
+
+@app.get("/search")
+def search():
+    query = request.args.get("q", "")
+    results = search_character(query)
+    return jsonify(results)
 
 if __name__ == "__main__":
     app.run(debug=True)
-
