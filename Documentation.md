@@ -172,3 +172,174 @@ Izzy's project is a very well-designed and highly functional design. Although I 
 ## Peer Testing - Yuna
 The program is very clear and simple and produces easy to read outputs. The functional requirements portrayed everything that was used in the code and the list function was pleasing to use. When searching for the driver name, it was really cool to see that you could also use nicknames or how one name could output multiple people. I also liked how whenever a new character was searched for, it was mentioned under a heading so that the user wouldn't get confused and overwhelmed with the lines and lines of words. The loading only took one second and the charts provided were informative and produced everything needed. Since I only have one body, it would be hard to determine the functionality of the load testing. The README.md did mention most things but it would have been better if it was more informative as if a new user were to use the program, it could be a bit confusing to use at first. 
 
+## Data Dictionary
+
+![alt text](image.png)
+
+## Routines and SUbroutines
+### Main Menu Loop
+#### Flowchart
+#### Algorithim
+
+
+    loop forever:
+    display menu
+    choice = input()
+
+    if choice == "1":
+        call search_character()
+    elif choice == "2":
+        call add_character()
+    elif choice == "3":
+        call view_codex()
+    elif choice == "4":
+        call remove_character()
+    elif choice == "5":
+        break loop
+    elif choice == "6":
+        show chart submenu
+    elif choice == "7":
+        call view_interaction_log()
+    elif choice == "8":
+        call show_help()
+    else:
+        print invalid choice
+
+
+### Chart Submenu
+#### Flowchart
+#### Algorithim
+
+display chart menu
+chart_choice = input()
+
+if chart_choice == "1":
+    plot_characters_per_faction()
+elif chart_choice == "2":
+    plot_characters_per_game()
+elif chart_choice == "3":
+    plot_codex_progress()
+else:
+    print invalid chart option
+
+### codex.py
+#### Flowchart
+#### Algorithim
+function search_character(name):
+    send GET request to API
+    log_interaction("Searched for: name")
+    if response OK:
+        return results
+    else:
+        return None
+
+### add_character(name)
+#### Flowchart
+#### Algorithim
+function add_character(name):
+    results = search_character(name)
+    if results exist:
+        for each character:
+            add to codex
+            log_interaction("Added: character")
+    else:
+        print invalid input
+
+### remove_character(name)
+#### Flowchart
+#### Algorithim
+function remove_character(name):
+    if name in codex:
+        remove from codex
+        log_interaction("Removed: name")
+    else:
+        print not found
+
+### view_codex()
+#### Flowchart
+#### Algorithim
+function view_codex():
+    print all codex entries
+    log_interaction("Viewed CoD-dex")
+
+### view_interaction_log()
+#### Flowchart
+#### Algorithim
+function view_interaction_log():
+    try:
+        open file
+        read lines
+        print each line
+    except FileNotFoundError:
+        print no log found
+
+### show_help()
+#### Flowchart
+#### Algorithim
+function show_help():
+    print instructions
+    print troubleshooting tips
+
+### plot_characters_per_faction()
+#### Flowchart
+#### Algorithim
+function plot_characters_per_faction():
+    extract factions
+    count occurrences
+    plot bar chart
+    log_interaction("Viewed charts")
+
+### plot_characters_per_game()
+#### Flowchart
+#### Algorithim
+function plot_characters_per_game():
+    gather all games
+    count occurrences
+    plot bar chart
+    log_interaction("Viewed charts")
+
+### plot_codex_progress()
+#### Flowchart
+#### Algorithim
+function plot_codex_progress():
+    total = number of characters
+    collected = number in codex
+    remaining = total - collected
+    plot pie chart
+    log_interaction("Viewed charts")
+
+### search_character(query)
+#### Flowchart
+#### Algorithim
+function search_character(query):
+    convert query to lowercase
+    results = empty list
+    for each character:
+        combine searchable fields
+        if query in combined:
+            add character to results
+    return results
+
+### /characters<name>
+#### Flowchart
+#### Algorithim
+function get_character(name):
+    results = search_character(name)
+    if results exist:
+        return results as JSON
+    else:
+        return error JSON with 404
+
+### /characters
+#### Flowchart
+#### Algorithim
+function list_characters():
+    return list of all character names
+
+### /search?q=keyword
+#### Flowchart
+#### Algorithim
+function search():
+    query = request parameter
+    results = search_character(query)
+    return results as JSON

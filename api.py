@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 
+
 app = Flask(__name__)
+
 
 character_list = [
   {
@@ -173,12 +175,14 @@ character_list = [
   }
 ]
 
+
 # -----------------------------
 # KEYWORD SEARCH (NO FUZZY)
 # -----------------------------
 def search_character(query):
     query = query.lower()
     results = []
+
 
     for character in character_list:
         combined = (
@@ -188,14 +192,18 @@ def search_character(query):
             character["first_appearance"]
         ).lower()
 
+
         if query in combined:
             results.append(character)
 
+
     return results
+
 
 # -----------------------------
 # ROUTES
 # -----------------------------
+
 
 @app.get("/characters/<name>")
 def get_character(name):
@@ -204,9 +212,11 @@ def get_character(name):
         return jsonify(results)
     return jsonify({"error": "Character not found"}), 404
 
+
 @app.get("/characters")
 def list_characters():
     return jsonify([c["name"] for c in character_list])
+
 
 @app.get("/search")
 def search():
@@ -214,5 +224,8 @@ def search():
     results = search_character(query)
     return jsonify(results)
 
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+
