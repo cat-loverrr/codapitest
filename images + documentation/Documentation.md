@@ -369,3 +369,6 @@ The program is very clear and simple and produces easy to read outputs. The func
         query = request parameter  
         results = search_character(query)  
         return results as JSON  
+
+## Structure Chart
+![alt text](image.png)
