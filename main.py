@@ -10,6 +10,7 @@ from codex import show_help # I believe these are imported in the 'from codex im
 
 def main():
     while True:
+        # Clears the txt file
         open("interaction_log.txt", "w").close()
         print("\nCall of Duty Character Index:")
         print("1. Search Character")

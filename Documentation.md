@@ -149,12 +149,13 @@ Version Control:
 
 
 ## Integration Evaluation
+![alt text](image-3.png) ![alt text](image-5.png)
 The system successfully integrates a local Flask API and the Matplotlib library.
 The API provides character data to the main program, and the CLI retrieves this data using HTTP requests. Searches return results correctly, confirming that the API is functioning as intended.
 Matplotlib has also been integrated to generate visualisations such as “Characters per Faction,” “Characters per Game,” and “CoD‑dex Progress.” These charts display correctly in separate windows, demonstrating that the module is working and receiving data from the program.
 Overall, the integration of both the API and external Python modules is functional and stable. The program responds quickly, handles user input, and produces accurate visual output.
-
 ## Development Evaluation
+![alt text](image-4.png)
 The user interface displays a clear numbered menu and responds correctly to user input. Each option leads to the appropriate function, such as searching characters or viewing the CoD-dex. Invalid inputs are handled with an error message. At this stage, the interface is functional and allows basic interaction, although some features (e.g., charts or extended error handling) may still be under development.
 
 
@@ -176,9 +177,12 @@ The program is very clear and simple and produces easy to read outputs. The func
 
 ![alt text](image.png)
 
-## Routines and SUbroutines
+## Gantt Chart
+![alt text](image-1.png)
+## Routines and Subroutines
 ### Main Menu Loop
 #### Flowchart
+![alt text](image-7.png)
 #### Algorithim
 
 
@@ -208,138 +212,160 @@ The program is very clear and simple and produces easy to read outputs. The func
 
 ### Chart Submenu
 #### Flowchart
+![alt text](image-6.png)
 #### Algorithim
 
-display chart menu
-chart_choice = input()
 
-if chart_choice == "1":
-    plot_characters_per_faction()
-elif chart_choice == "2":
-    plot_characters_per_game()
-elif chart_choice == "3":
-    plot_codex_progress()
-else:
-    print invalid chart option
+    display chart menu
+    chart_choice = input()
+    if chart_choice == "1":  
+        plot_characters_per_faction()  
+    elif chart_choice == "2":  
+        plot_characters_per_game()  
+    elif chart_choice == "3":  
+        plot_codex_progress()  
+    else:  
+        print invalid chart option  
 
-### codex.py
+### search_character(name)
 #### Flowchart
+![alt text](image-8.png)
 #### Algorithim
-function search_character(name):
-    send GET request to API
-    log_interaction("Searched for: name")
-    if response OK:
-        return results
-    else:
-        return None
+    
+    function search_character(name):  
+        send GET request to API  
+        log_interaction("Searched for: name")  
+        if response OK:  
+            return results  
+        else:  
+            return None  
 
 ### add_character(name)
 #### Flowchart
+![alt text](image-9.png)
 #### Algorithim
-function add_character(name):
-    results = search_character(name)
-    if results exist:
-        for each character:
-            add to codex
-            log_interaction("Added: character")
-    else:
-        print invalid input
+
+    function add_character(name):  
+        results = search_character(name)  
+        if results exist:  
+            for each character:  
+                add to codex  
+                log_interaction("Added: character")  
+        else:  
+            print invalid input  
 
 ### remove_character(name)
 #### Flowchart
+![alt text](image-10.png)
 #### Algorithim
-function remove_character(name):
-    if name in codex:
-        remove from codex
-        log_interaction("Removed: name")
-    else:
-        print not found
+
+    function remove_character(name):  
+        if name in codex:  
+            remove from codex  
+            log_interaction("Removed: name")  
+        else:  
+            print not found  
 
 ### view_codex()
 #### Flowchart
+![alt text](image-11.png)
 #### Algorithim
-function view_codex():
-    print all codex entries
-    log_interaction("Viewed CoD-dex")
+    
+    function view_codex():  
+    print all codex entries  
+    log_interaction("Viewed CoD-dex")  
 
 ### view_interaction_log()
 #### Flowchart
+![alt text](image-12.png)
 #### Algorithim
-function view_interaction_log():
-    try:
-        open file
-        read lines
-        print each line
-    except FileNotFoundError:
-        print no log found
+    
+    function view_interaction_log():  
+    try:  
+        open file  
+        read lines  
+        print each line  
+    except FileNotFoundError:  
+        print no log found  
 
 ### show_help()
 #### Flowchart
+![alt text](image-13.png)
 #### Algorithim
-function show_help():
-    print instructions
-    print troubleshooting tips
+    
+    function show_help():  
+        print instructions  
+        print troubleshooting tips  
 
 ### plot_characters_per_faction()
 #### Flowchart
+![alt text](image-14.png)
 #### Algorithim
-function plot_characters_per_faction():
-    extract factions
-    count occurrences
-    plot bar chart
-    log_interaction("Viewed charts")
+    
+    function plot_characters_per_faction():  
+        extract factions  
+        count occurrences  
+        plot bar chart  
+        log_interaction("Viewed charts")  
 
 ### plot_characters_per_game()
 #### Flowchart
+![alt text](image-15.png)
 #### Algorithim
-function plot_characters_per_game():
-    gather all games
-    count occurrences
-    plot bar chart
-    log_interaction("Viewed charts")
+    
+    function plot_characters_per_game():  
+        gather all games  
+        count occurrences  
+        plot bar chart  
+        log_interaction("Viewed charts")  
 
 ### plot_codex_progress()
 #### Flowchart
+![alt text](image-16.png)
 #### Algorithim
-function plot_codex_progress():
-    total = number of characters
-    collected = number in codex
-    remaining = total - collected
-    plot pie chart
-    log_interaction("Viewed charts")
+    function plot_codex_progress():  
+        total = number of characters  
+        collected = number in codex  
+        remaining = total - collected  
+        plot pie chart  
+        log_interaction("Viewed charts")  
 
 ### search_character(query)
 #### Flowchart
+![alt text](image-17.png)
 #### Algorithim
-function search_character(query):
-    convert query to lowercase
-    results = empty list
-    for each character:
-        combine searchable fields
-        if query in combined:
-            add character to results
-    return results
+    function search_character(query):  
+        convert query to lowercase  
+        results = empty list  
+        for each character:  
+            combine searchable fields  
+            if query in combined:  
+                add character to results  
+        return results  
 
 ### /characters<name>
 #### Flowchart
+![alt text](image-18.png)
 #### Algorithim
-function get_character(name):
-    results = search_character(name)
-    if results exist:
-        return results as JSON
-    else:
-        return error JSON with 404
+    function get_character(name):  
+        results = search_character(name)  
+        if results exist:  
+            return results as JSON   
+        else:  
+            return error JSON with 404  
 
 ### /characters
 #### Flowchart
+![alt text](image-19.png)
 #### Algorithim
-function list_characters():
-    return list of all character names
+    function list_characters():  
+        return list of all character names  
 
 ### /search?q=keyword
 #### Flowchart
+![alt text](image-20.png)
 #### Algorithim
-function search():
-    query = request parameter
-    results = search_character(query)
-    return results as JSON
+    function search():  
+        query = request parameter  
+        results = search_character(query)  
+        return results as JSON  
